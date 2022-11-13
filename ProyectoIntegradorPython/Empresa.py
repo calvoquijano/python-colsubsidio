@@ -1,14 +1,13 @@
 import datetime
 
-
-###Datos de la persona###
+###Datos persona Fase 1###
 numeroDeIdentificacion = int(input("Escriba su número de identificación: "))
 nombres = input("Escriba su(s) nombre(s): ")
 apellidos = input("Escriba sus apellidos: ")
 direccion = input("Digite su dirección: ")
 telefono = int(input("Número de teléfono: "))
 genero = input("Con qué género se identifica: ")
-estadoCivil = input("Estado civil: ")
+estadoCivil = input("Estado civil: ").upper()
 #Hijos
 hijos = input("¿Tiene hijos?(Si/No) ").upper()
 if hijos == "SI":
@@ -28,7 +27,6 @@ else:
             break
         else:
             cuantosHijos = "Respuesta inválida"
-        hijos = "Diferente"
 #Fin de hijos
 estatura = float(input("¿Cuánto mides? "))
 fechaActual = datetime.datetime.now()
@@ -39,8 +37,65 @@ fechaNacimiento = datetime.date(anio,mes,dia)
 anios = int(datetime.date.strftime(fechaActual, "%Y"))
 edad = anios - anio
 sueldo = int(input("¿Cuánto es su sueldo al mes? $"))
-diasTrabajados = int(input("¿Cuántos días lleva trabajando? "))
+diasTrabajados = int(input("¿Cuántos días trabajó este mes? "))
 ###Fin Datos de la persona###
+
+
+###Bonos Fase 2###
+if edad > 55:
+    bonoEdad = sueldo * 0.05
+    sueldo += bonoEdad
+    print("""
+          ---------------------------------------------------------
+          ***Felicitaciones tiene un bono del 5% por su edad***
+          ---------------------------------------------------------
+          """)
+fechaFundacion = datetime.date(1984,4,2)
+diaFundacion = fechaFundacion.strftime("%d%m")
+diaCumple = fechaNacimiento.strftime("%d%m")
+if diaFundacion == diaCumple:
+    print("""
+          ---------------------------------------------------------
+          ***Felicitaciones por cumplir el mismo día de la 
+          fundación de la empresa, haremos una fiesta***
+          ---------------------------------------------------------
+          """)
+if estadoCivil == "CASADO" and hijos == "SI":
+    print("""
+          ---------------------------------------------------------
+          ***Felicitaciones por estar casado(a) y tener hijos 
+          la empresa le otorgará un viaje cada Diciembre***
+          ---------------------------------------------------------
+          """)
+if sueldo >= 1000000 and sueldo <= 1500000:
+    bonoSueldo = sueldo * 0.02
+    sueldo += bonoSueldo
+    print("""
+          ---------------------------------------------------------
+          ***Felicitaciones tiene un bono del 2% por tu salario***
+          ---------------------------------------------------------
+          """)
+elif sueldo > 1500000 and sueldo <= 2000000:
+    bonoSueldo = sueldo * 0.05
+    sueldo += bonoSueldo
+    print("""
+          ---------------------------------------------------------
+          ***Felicitaciones tiene un bono del 5% por tu salario***
+          ---------------------------------------------------------
+          """)
+if diasTrabajados >= 20 and sueldo < 1000000:
+    print("""
+          ---------------------------------------------------------
+          ***Felicitaciones tiene derecho a un bono de alimentación***
+          ---------------------------------------------------------
+          """)
+###Fin Bonos Fase 2###
+
+###Tipo de contrato Fase 3###
+###Fin Tipo de contrato Fase 3###
+
+###Cantidades Fase 4###
+###Fin Cantidades Fase 4###
 
 
 print("""
@@ -58,7 +113,7 @@ print("""
       Mide: {9} m
       Fecha de nacimiento: {10}
       Su salario es de: ${12:,.2f}
-      Ha trabajado: {13} días
+      Ha trabajado: {13} días este mes
       
       
       """.format(numeroDeIdentificacion,nombres,apellidos,direccion,telefono,genero,estadoCivil,hijos,cuantosHijos,estatura,fechaNacimiento,edad,sueldo,diasTrabajados))
